@@ -1,41 +1,24 @@
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 
-class FitnessApp {
-    private List<User> users = new ArrayList<>();
+// Main class responsible for establishing the database connection and launching the application.
+public class FitnessApp {
 
-    public void addUser(User user) {
-        users.add(user);
-    }
+    private static final String URL = "jdbc:postgresql://localhost:5432/fitnessdb";
+    private static final String USER = "postgres";
+    private static final String PASSWORD = "12345678";
 
-    public User findUserByName(String name) {
-        for (User user : users) {
-            if (user.getName().equalsIgnoreCase(name)) {
-                return user;
-            }
+    public static void main(String[] args) {
+        try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD)) {
+            System.out.println("Connected to the PostgreSQL database successfully.");
+            // Initialize the database table if it does not exist.
+            DatabaseInitializer.initializeDatabase(connection);
+            // Launch the main menu for user interaction.
+            new MenuHandler(connection).showMainMenu();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        return null;
-    }
-
-    public List<User> getUsersSortedByAge() {
-        List<User> sortedUsers = new ArrayList<>(users);
-        sortedUsers.sort(Comparator.comparingInt(User::getAge));
-        return sortedUsers;
-    }
-
-    public List<User> filterUsersByWeight(double minWeight) {
-        List<User> filteredUsers = new ArrayList<>();
-        for (User user : users) {
-            if (user.getWeight() > minWeight) {
-                filteredUsers.add(user);
-            }
-        }
-        return filteredUsers;
-    }
-
-    @Override
-    public String toString() {
-        return "FitnessApp{users=" + users + "}";
     }
 }
+
