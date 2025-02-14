@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Fitness Tracker</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; }
+        .container { max-width: 800px; margin: auto; }
+        input, button { margin: 5px; padding: 8px; }
+        table { width: 100%; margin-top: 20px; border-collapse: collapse; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .action-buttons { display: flex; justify-content: space-between; }
+    </style>
+</head>
+<body>
+<h1>Fitness Tracker</h1>
+
+<div class="container">
+    <h2>User Management</h2>
+    <div>
+        <input type="number" id="userId" placeholder="User ID (for update)">
+        <input type="text" id="name" placeholder="Name">
+        <input type="number" id="age" placeholder="Age">
+        <input type="number" step="0.1" id="weight" placeholder="Weight (kg)">
+        <input type="number" step="0.01" id="height" placeholder="Height (m)">
+        <button onclick="addUser()">Add User</button>
+        <button onclick="updateUser()">Update User</button>
+    </div>
+
+    <h3>Users</h3>
+    <table id="usersTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Height</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="usersTableBody">
+        <!-- Users will be dynamically populated here -->
+        </tbody>
+    </table>
+
+    <h2>Workout Management</h2>
+    <div>
+        <input type="number" id="workoutId" placeholder="Workout ID (for update)">
+        <input type="number" id="workoutUserId" placeholder="User ID">
+        <input type="text" id="type" placeholder="Workout Type">
+        <input type="number" id="duration" placeholder="Duration (min)">
+        <input type="number" id="calories" placeholder="Calories Burned">
+        <input type="date" id="date">
+        <button onclick="addWorkout()">Add Workout</button>
+        <button onclick="updateWorkout()">Update Workout</button>
+    </div>
+
+    <h3>Workouts</h3>
+    <table id="workoutsTable">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>User ID</th>
+            <th>Type</th>
+            <th>Duration</th>
+            <th>Calories</th>
+            <th>Date</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody id="workoutsTableBody">
+        <!-- Workouts will be dynamically populated here -->
+        </tbody>
+    </table>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
